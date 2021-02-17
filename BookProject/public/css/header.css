@@ -1,0 +1,11 @@
+#h_button{
+  margin-left: auto;
+  width: 1000px;
+  text-align: right;
+}
+#button{
+  height: 40px;
+  width: 130px;
+  margin: 0px;
+  text-align: center;
+}

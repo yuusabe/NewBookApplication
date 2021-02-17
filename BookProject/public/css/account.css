@@ -1,0 +1,61 @@
+/*画面下文字*/
+#text{
+  text-align: center;
+  color: #666;
+  font-size: x-large;
+  margin-top: 50px;
+}
+/*テキストボックスを中央寄せ・囲み線*/
+#tb_p{
+  text-align: center;
+  border: 3px solid #38b6ff;
+  border-radius: 10px;
+  height: 500px;
+  width: 550px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+/*テキストボックス上の文字*/
+#tb{
+  color: #666;
+  margin-top: 30px;
+}
+/*テキストボックスの設定*/
+#tbox{
+  text-align: center;
+  outline:0;/*クリック時の青い枠線消す*/
+  width: 500px;
+  height:50px;/*検索ボックスの高さ*/
+  border-radius: 10px;/*検索ボックスの角を丸める*/
+  background:#fffef4;/*検索ボックスの背景カラー*/		
+  margin: 0px 10px 10px;
+  border: 1px solid #666;
+}
+/*ラジオボタンの設定*/
+#radio{
+  color: #666;
+  margin-bottom: 40px;
+}
+/*アカウント一覧中央寄せ*/
+#account_p{
+  text-align: center;
+}
+/*アカウント横並び*/
+#account{
+  display: inline-block;
+}
+/*アカウント一覧テキスト*/
+#a_text{
+  color: #666;
+}
+/*ボタン中央揃え*/
+#button_p{
+  text-align: center;
+  margin-bottom: 50px;
+}
+/*ボタン横並び*/
+#button{
+  margin: 10px 20px;
+  display: inline-block;
+}

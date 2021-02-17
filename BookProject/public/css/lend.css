@@ -1,0 +1,53 @@
+/*本中央揃え*/
+#book_p{
+  text-align: center;
+  margin-top: 30px;
+}
+/*横並び*/
+#book{
+  text-align: center;
+  color:#666;
+  display: inline-block;
+  vertical-align: top;
+}
+/*表紙画像*/
+#image{
+  margin-top: 50px;
+}
+/*画面下文字*/
+#lend{
+  text-align: center;
+  color:#666;
+  margin-top: 20px;
+  font-weight: bolder;
+  font-size: x-large;
+}
+/*タイトル大きく表示*/
+#title{
+  font-size: x-large;
+  font-weight: bolder;
+}
+/*本情報表示*/
+#text{
+  text-align: left;
+  margin-left: 50px;
+  color: #666;
+  margin-top: 30px;
+}
+/*日付ボックス中央寄せ*/
+#date{
+  text-align: center;
+  width: 600px;
+  margin: auto;
+}
+/*ボタン中央揃え*/
+#button_p{
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+/*ボタン横並び*/
+#button{
+  margin: 10px 20px;
+  display: inline-block;
+}

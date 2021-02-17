@@ -1,0 +1,92 @@
+/*検索ボックス*/
+#sbox{
+  outline:0;/*クリック時の青い枠線消す*/
+  width: 500px;
+  height:50px;/*検索ボックスの高さ*/
+  border-radius: 10px;/*検索ボックスの角を丸める*/
+  background:#fffef4;/*検索ボックスの背景カラー*/		
+  margin: 10px 10px 0px;
+  border: 1px solid #666;
+}
+/*検索ボタン*/
+#sbtn{
+  width:100px;/*検索ボタンの横幅*/ 
+  height:50px;/*検索ボタンの縦幅*/  
+  top:0;
+  border-radius:10px;/*検索ボタンの角を丸める*/ 
+  background:#38b6ff;/*検索ボタンの背景カラー*/ 
+  border:none;/*検索ボタンの枠線を消す*/ 
+  color:#fff;/*検索ボタンのテキストカラー*/ 
+  font-weight:bold;/*検索ボタンのテキスト太字*/ 
+  font-size:16px;/*検索ボタンのフォントサイズ*/ 
+  outline: none;
+  border-color: #666;
+}
+/*検索ボタンマウスオーバー時*/
+#sbtn:hover{
+  color:#666;/*検索ボタンマウスオーバー時のフォントカラー*/ 
+}
+/*ドロップダウン*/
+#dropdown{
+  width: 500px;
+  height:50px;
+  font-weight:bold;
+  border-radius: 10px;
+  margin: 0px 10px 10px;
+}
+/*検索ボックス達の位置*/
+#search{
+  text-align: center;
+}
+/*本中央寄せ*/
+#book_p{
+  text-align: center;
+}
+/*本横並び*/
+#book{
+  text-align: center;
+  color:#666;
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+/*本表紙画像設定*/
+#image{
+  margin-top: 50px;
+}
+/*カテゴリ下線*/
+#category{
+  text-decoration: underline;
+  text-decoration-color: #666;
+}
+/*本情報テキスト設定*/
+#text{
+  text-align: left;
+  margin-left: 50px;
+  color: #666;
+  margin-top: 30px;
+  width: 100%;
+}
+/*タイトル大きく表示*/
+#title{
+  font-size: x-large;
+  font-weight: bolder;
+  width: 100%;
+}
+/*ボタン中央揃え*/
+#button_p{
+  text-align: center;
+  margin-bottom: 70px;
+  margin-top: 50px;
+}
+/*ボタン横並び*/
+#button{
+  margin: 10px 20px;
+  display: inline-block;
+}
+/*ページ下遷移ボタン*/
+#next{
+  width:100px; 
+  height:50px;
+  margin-bottom: 50px;
+}

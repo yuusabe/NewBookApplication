@@ -28,3 +28,4 @@ Route::get('/hello', function () {
         'message' => $message
     ]);
 });
+// 変更追加

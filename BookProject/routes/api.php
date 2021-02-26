@@ -19,3 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('index', 'App\Http\Controllers\TestApiController@index');
+
+// テストAPI(Hello API)
+Route::get('/hello', function () {
+    $message = 'Hello';
+
+    return response()->json([
+        'message' => $message
+    ]);
+});

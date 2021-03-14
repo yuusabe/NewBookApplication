@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('index', 'App\Http\Controllers\TestApiController@index');
 
-// テストAPI(Hello API)
-Route::get('/hello', function () {
-    $message = 'Hello';
-
-    return response()->json([
-        'message' => $message
-    ]);
-});
-// 変更追加
+// 書籍一覧取得API（ソート機能あり）
+Route::get('/book/all_get', [BookListController::class, 'all_get']);

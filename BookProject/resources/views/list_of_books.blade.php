@@ -7,9 +7,9 @@
 
 <main>
 <!-- バリューはkeywordの変数 -->
-<!-- <form action="http://54.248.141.223/list_of_books" method="GET">
+<form action="http://54.248.141.223/list_of_books" method="GET">
   <div id="search">
-    <input id="sbox" name="s" type="text" value=keyword placeholder="キーワードを入力" />
+    <input id="sbox" name="s" type="text" value="" placeholder="キーワードを入力" />
   
   <div class="dropdown">
     <button type="button" id="dropdown" id="search"
@@ -35,28 +35,27 @@
     並び替え
     </button>
     <ul class="dropdown-menu">
-      <li><button class="dropdown-item" value="発行年">発行年</button></li>
-      <li><button class="dropdown-item" value="著者">著者</button></li>
       <li><button class="dropdown-item" value="タイトル">タイトル</button></li>
+      <li><button class="dropdown-item" value="発行年">発行年</button></li>
     </ul>
   </div>
   
   <input id="sbtn" id="search" type="submit" value="検索" /></div>
-  </form> -->
+  </form>
 
 
   <div id="book_p">
     <div id="book">
-      <img src="" id="image" alt="表紙画像" width="135" height="135" />
+      <img src="" id="cover_pic" alt="表紙画像" width="135" height="135" />
     </div>
     
     <div id="book">
       <div id="text">
         <p id="category">カテゴリ</p>
-        <p id="title">タイトル：</p>
-        <p>発行年：</p>
-        <p>出版社：</p>
-          <p>貸出状況：貸出可</p>
+        <p id="title"></p>
+        <p id="year_of_issue"></p>
+        <p id="publisher"></p>
+        <p id="logic_flag">貸出状況：貸出可</p>
       </div>
     </div>
   </div>
@@ -110,5 +109,6 @@
       </button>
     </div>
   </div>
+<script src="{{ mix('js/all_get.js') }}"></script>  
 </main>
 @endsection

@@ -19,7 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('index', 'App\Http\Controllers\TestApiController@index');
-
 // 書籍一覧取得API（ソート機能あり）
 Route::get('/book/all_get', [BookListController::class, 'all_get']);
+use App\Http\Controllers\AccountController;
+
+#アカウント登録API
+Route::post('/account/add', [AccountController::class, 'store']);
+#アカウント情報取得API
+Route::get('/account/get', [AccountController::class, 'show']);
+#アカウント編集API
+Route::post('/account/edit', [AccountController::class, 'update']);
+#アカウント削除API
+Route::post('/account/delete', [AccountController::class, 'destroy']);

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookListController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // 書籍一覧取得API（ソート機能あり）
 Route::get('/book/all_get', [BookListController::class, 'all_get']);
-use App\Http\Controllers\AccountController;
 
 #アカウント登録API
 Route::post('/account/add', [AccountController::class, 'store']);

@@ -93,7 +93,10 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $account = Account::where('id', $id)->update($update);
+        $destroy = [
+            'logic_flag' => false
+        ];
+        $account = Account::where('id', $id)->update($destroy);
         if ($account) {
             return response()->json([
                 'message' => 'Account updated successfully',

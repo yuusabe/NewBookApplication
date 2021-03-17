@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+// use Illuminate\Support\Facades\Log;
 
 class BookListController extends Controller
 {
@@ -12,12 +13,13 @@ class BookListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all_get()
+    public function all_get(Request $request)
     {
-        /* $request = {'key': 'asc', 'sort_method': ''}; */
-        $sort_method = 'desc';
-        $key = 'year_of_issue';
+        $key = $request->input('key');
+        $sort_method = $request->input('sort_method');
+        // Log::debug($sort_method);
         $master_data = Book::all();
+        
         // ソートの指定がある時
         if ($sort_method == 'asc') {
             $book_data = $master_data->sortBy($key,SORT_NATURAL)->values()->toArray();

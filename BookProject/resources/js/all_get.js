@@ -24,6 +24,4 @@ function Example(jsonObj){
   title.textContent = data[0].title;
   year_of_issue.textContent = '発行年： ' + data[0].year_of_issue + '年';
   publisher.textContent = '出版社： ' + data[0].publisher
-
-  
 }

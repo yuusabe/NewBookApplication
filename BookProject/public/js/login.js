@@ -1,5 +1,6 @@
 $(function(){
     $("#login").click(function(){
+        // APIを叩く
         $.ajax({
             type: "POST",
             url: "/api/login",
@@ -8,6 +9,7 @@ $(function(){
                 password: $("#pass").val()
             },
             dataType: "json"
+        // 成功時
         }).done(function(res){
             if(res.code == 200){
                 switch(res.message){
@@ -23,7 +25,9 @@ $(function(){
                 }
             }else{
                 console.log(res.errors);
+                $("#login_error").text(`${res.message}`);
             }
+        // 失敗時
         }).fail(function(e){
             console.error("ログインエラー", e);
         });

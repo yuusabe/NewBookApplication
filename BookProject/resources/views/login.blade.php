@@ -12,6 +12,7 @@
       <img src="image/dtg_book_logo.png" id="icon" alt="アイコン" />
     </div>
 
+    <p id="login_error"></p>
     <!-- Login Form -->
     <form name="login">
     @csrf

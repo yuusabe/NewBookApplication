@@ -106,11 +106,26 @@ class CognitoClient
             switch($e->getAwsErrorCode()){
                 // ユーザー名（アドレス）被り
                 case "NotAuthorizedException":
-                    $response = [
-                        "message" => "ユーザー名かパスワードが間違っています。",
-                        "errors" => $e->getAwsErrorMessage()
-                    ];
+                    //メールアドレスorパスワードミス
+                    if($e->getAwsErrorMessage() == "Incorrect username or password."){
+                        $response = [
+                            "message" => "ユーザー名かパスワードが間違っています。再度入力してください。",
+                            "errors" => $e->getAwsErrorMessage()
+                        ];
+                    //失敗回数上限超過
+                    }else if($e->getAwsErrorMessage() == "Password attempts exceeded"){
+                        $response = [
+                            "message" => "失敗回数が上限を超えました。しばらく時間をおいてから再度お試しください。",
+                            "errors" => $e->getAwsErrorMessage()
+                        ];
+                    }else{
+                        $response = [
+                            "message" => "ユーザー名かパスワードが間違っています。再度入力してください。",
+                            "errors" => $e->getAwsErrorMessage()
+                        ];
+                    }
                     break;
+                // その他エラー
                 default:
                 $response = [
                     "message" => $e->getAwsErrorCode(),
@@ -153,12 +168,14 @@ class CognitoClient
                         "errors" => $e->getAwsErrorMessage()
                     ];
                     break;
+                // パスワードエラー
                 case "InvalidPasswordException":
                     $response = [
                         "message" => "パスワードは８文字以上で英数字込み、大文字小文字を含める必要があります。",
                         "errors" => $e->getAwsErrorMessage()
                     ];
                     break;
+                // その他エラー
                 default:
                     $response = [
                         "message" => $e->getAwsErrorCode(),

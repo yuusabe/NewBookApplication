@@ -42,6 +42,12 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        ],
+
+        'auth' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \App\Http\Middleware\CognitoAuthVerifier::class,
         ],
     ];
 

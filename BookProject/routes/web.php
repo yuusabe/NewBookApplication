@@ -20,3 +20,15 @@ Route::get('/', function () {
 Route::get('/list_of_books', function () {
     return view('list_of_books');
 });
+
+Route::prefix('login')->group(function () {
+    Route::get('/', function () {
+        return view('login');
+    });
+    Route::get('/check', function () {
+        return view('login_check');
+    });
+    Route::get('/first', function () {
+        return view('login_first');
+    });
+});

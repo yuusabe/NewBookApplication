@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBooksTable extends Migration
+class BookNumberLendsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class AddBooksTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('lends', function (Blueprint $table) {
+            $table->bigInteger('book_number')->unsigned();
+            $table->foreign('book_number')
+            ->references('book_number')->on('books')
+            ->onDelete('cascade');
+        });
     }
 
     /**
@@ -23,8 +28,6 @@ class AddBooksTable extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

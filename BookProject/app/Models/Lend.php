@@ -11,7 +11,9 @@ class Lend extends Model
     protected $primaryKey = 'lend_number';
     protected $fillable = [
         'book_number',
-        
+        'account_number',
+        'return_day',
+        'lend_flag',
     ];
 
 }

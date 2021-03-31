@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
-// use Illuminate\Support\Facades\Log;
 
 class BookListController extends Controller
 {
@@ -17,7 +16,6 @@ class BookListController extends Controller
     {
         $key = $request->input('key');
         $sort_method = $request->input('sort_method');
-        // Log::debug($sort_method);
         $master_data = Book::all();
         
         // ソートの指定がある時

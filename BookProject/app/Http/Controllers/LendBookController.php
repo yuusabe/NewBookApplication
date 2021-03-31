@@ -26,16 +26,10 @@ class LendBookController extends Controller
                 'data' => $lend
             ], 200, [], JSON_UNESCAPED_UNICODE);  
         } catch(\Throwable $e) {
+            // データを挿入できなかった時
             return response()->json([
             'message' => 'システムエラー。管理者にお問い合わせください。',
             ], 500);
         }
-        
-        // データを挿入できなかった時
-
-        /* return response()->json([
-            'message' => 'システムエラー。管理者にお問い合わせください。',
-        ], 500); */
-       
     }
 }

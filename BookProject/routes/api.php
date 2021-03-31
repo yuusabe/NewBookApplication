@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookListController;
 use App\Http\Controllers\LendBookController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ReturnBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::prefix('cognito')->group(function () {
 Route::get('/book/all_get', [BookListController::class, 'all_get']);
 // 貸出API
 Route::post('/book/lend', [LendBookController::class, 'lend']);
+// 返却API
+Route::post('/book/return', [ReturnBookController::class, 'return']);
 
 #アカウント登録API
 Route::post('/account/add', [AccountController::class, 'store']);

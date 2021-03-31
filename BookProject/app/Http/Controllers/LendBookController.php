@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lend;
+use App\Http\Requests\LendBook;
+use Illuminate\Support\Facades\Log;
 
 class LendBookController extends Controller
 {
@@ -14,14 +16,26 @@ class LendBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function lend(Request $request)
+    public function lend(LendBook $request)
     {
-        $lend = Lend::create($request->all());
-        return response()->json([
-            'message' => 'ok',
-            'data' => $lend
-        ], 200, [], JSON_UNESCAPED_UNICODE);
+        try {
+            $lend = Lend::create($request->all());
+            // データを挿入できた時
+            return response()->json([
+                'message' => 'ok',
+                'data' => $lend
+            ], 200, [], JSON_UNESCAPED_UNICODE);  
+        } catch(\Throwable $e) {
+            return response()->json([
+            'message' => 'システムエラー。管理者にお問い合わせください。',
+            ], 500);
+        }
+        
+        // データを挿入できなかった時
+
+        /* return response()->json([
+            'message' => 'システムエラー。管理者にお問い合わせください。',
+        ], 500); */
+       
     }
-
-
 }

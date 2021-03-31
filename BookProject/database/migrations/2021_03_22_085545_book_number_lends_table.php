@@ -17,6 +17,7 @@ class BookNumberLendsTable extends Migration
             $table->bigInteger('book_number')->unsigned();
             $table->foreign('book_number')
             ->references('book_number')->on('books')
+            ->onUpdate('cascade')
             ->onDelete('cascade');
         });
     }

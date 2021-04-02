@@ -48,3 +48,16 @@ Route::get('/account_management_check', function () {
     return view('account_management_check');
 });
 
+//マイページ画面
+Route::get('/mypage', function () {
+    return view('mypage');
+});
+//パスワード変更画面
+Route::get('/password_change', function () {
+    return view('password_change');
+});
+//完了画面
+Route::get('/completion', function () {
+    return view('completion');
+});
+

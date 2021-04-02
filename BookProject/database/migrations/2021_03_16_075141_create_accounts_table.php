@@ -17,8 +17,8 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('account_name');
             $table->string('mail_address');
-            $table->boolval('amanager_flag');
-            $table->boolval('logic_flag');
+            $table->boolean('manager_flag');
+            $table->boolean('logic_flag');
             $table->timestamps();
         });
     }

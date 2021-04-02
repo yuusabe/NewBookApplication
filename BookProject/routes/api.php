@@ -25,15 +25,21 @@ Route::group(['middleware' => 'auth'], function (){
 
 });
 
-//ログイン
+// ログイン
 Route::prefix('login')->group(function () {
     Route::post('/', 'App\Http\Controllers\CognitoController@login');
     Route::post('/first', 'App\Http\Controllers\CognitoController@firstLogin');
+    Route::post('/forgot_password', 'App\Http\Controllers\CognitoController@forgotPassword');
 });
 
-//Cognito
+// ログアウト
+Route::get('logout', 'App\Http\Controllers\LogoutController@deleteCookie');
+
+// Cognito
 Route::prefix('cognito')->group(function () {
-    Route::post('add', 'App\Http\Controllers\CognitoController@cognitoAdd');
+    Route::post('create_user', 'App\Http\Controllers\CognitoController@createUser');
+    Route::post('change_password', 'App\Http\Controllers\CognitoController@changePassword');
+    Route::post('delete_user', 'App\Http\Controllers\CognitoController@deleteUser');
 });
 // 書籍一覧取得API（ソート機能あり）
 Route::get('/book/all_get', [BookListController::class, 'all_get']);

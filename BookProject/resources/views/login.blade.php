@@ -12,7 +12,6 @@
       <img src="image/dtg_book_logo.png" id="icon" alt="アイコン" />
     </div>
 
-    <p id="login_error"></p>
     <!-- Login Form -->
     <form name="login">
     @csrf
@@ -20,10 +19,11 @@
       <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="パスワード">
       <input type="button" id="login" class="fadeIn fourth" value="ログイン">
     </form>
+    <p id="login_error"></p>
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/password_send'">パスワードを忘れた方はこちら</a>
+        <a class="underlineHover" href="#" onclick="location.href='/login/forget'">パスワードを忘れた方はこちら</a>
       </div>
   </div>
 </div>

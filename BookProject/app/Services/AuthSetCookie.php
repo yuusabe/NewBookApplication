@@ -41,4 +41,24 @@ class AuthSetCookie
         return false;
     }
 
+    public function forgetPasswordCookie($email)
+    {
+        if($email){
+            Cookie::queue("email", $email);
+            return true;
+        }
+
+        return false;
+    }
+
+    public function deleteCookie()
+    {
+        Cookie::queue(Cookie::forget("email"));
+        Cookie::queue(Cookie::forget("mflag"));
+        Cookie::queue(Cookie::forget("aname"));
+        Cookie::queue(Cookie::forget("id_token"));
+        Cookie::queue(Cookie::forget("access_token"));
+        Cookie::queue(Cookie::forget("refresh_token"));
+        return true;
+    }
 }

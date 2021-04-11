@@ -3,7 +3,7 @@ var __webpack_exports__ = {};
 /*!*********************************!*\
   !*** ./resources/js/all_get.js ***!
   \*********************************/
-var url = 'http://homestead-two.test/api/book/all_get'; //操作したいHTML領域を取得
+var url = '/api/book/all_get'; //操作したいHTML領域を取得
 
 var title = document.getElementById('title');
 var year_of_issue = document.getElementById('year_of_issue'); //APIからJSONデータを取得する

@@ -10,6 +10,7 @@ use App\Cognito\CognitoClient;
 use App\Services\ApiResponseFormatter;
 use App\Services\AuthSetCookie;
 use App\Cognito\JwtVerifier;
+use Validator;
 
 class CognitoController extends Controller
 {
@@ -25,6 +26,20 @@ class CognitoController extends Controller
     //ユーザープール登録
     public function createUser(Request $request)
     {
+        $validator = Validator::make($request->all(), 
+        [
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
         // 属性
         // CognitoClientクラスのcognitoAddメソッド呼び出し
         $response = $this->cognito_client->createUser($request->email, $request->password);
@@ -49,6 +64,20 @@ class CognitoController extends Controller
     //ログイン
     public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), 
+        [
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
         // CognitoClientクラスのloginメソッドの呼び出し
         $response = $this->cognito_client->login($request->email, $request->password);
 
@@ -91,9 +120,31 @@ class CognitoController extends Controller
 
     // 初回ログイン時パスワード変更
     public function firstLogin(Request $request){
+        $validator = Validator::make($request->all(), 
+        [
+            'password' => ['required', 'min:8'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
         // Cookieからメールアドレスとセッションの取得
         $email = Cookie::get("email");
         $session = Cookie::get("cognito_session");
+
+        if(!isset($email, $session)){
+            $formatter = new ApiResponseFormatter(
+                401, '再度ログインしてください', 'Cookie Lost'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
 
         // CognitoClientクラスのfirstLoginメソッドの呼び出し
         $response = $this->cognito_client->firstLogin($email, $request->password, $session);
@@ -126,6 +177,19 @@ class CognitoController extends Controller
     // パスワード紛失
     public function forgotPassword(Request $request)
     {
+        $validator = Validator::make($request->all(), 
+        [
+            'email' => ['required', 'email'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
         $response = $this->cognito_client->forgotPassword($request->email);
 
         if(Arr::has($response, "errors")){
@@ -133,8 +197,59 @@ class CognitoController extends Controller
                 500, $response["message"], $response["errors"]
             );
         }else{
+            $set_result = $this->set_cookie->forgetPasswordCookie($request->email);
+            if($set_result){
+                $formatter = new ApiResponseFormatter(
+                    200, "ok", "Forgot Password Challenge Start."
+                );
+            }else{
+                $formatter = new ApiResponseFormatter(
+                    500, "システムエラー。管理者にお問い合わせください。", "メールアドレスをCookieに保存できませんでした。"
+                );
+            }
+        }
+        return response()->json(
+            $formatter->getResponseArray()
+        );
+    }
+
+    // パスワード紛失確認
+    public function confirmForgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+        [
+            'password' => ['required', 'min:8'],
+            'code' => ['required', 'min:6'],
+        ]);
+        if($validator->fails()){
             $formatter = new ApiResponseFormatter(
-                200, "ok", "Forgot Password Challenge Start."
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
+        $email = Cookie::get("email");
+
+        if(!isset($email)){
+            $formatter = new ApiResponseFormatter(
+                401, '再度検証コードを送信してください', 'Cookie Lost'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
+        $response = $this->cognito_client->confirmForgotPassword($email, $request->password, $request->code);
+        if(Arr::has($response, "errors")){
+            $formatter = new ApiResponseFormatter(
+                500, $response["message"], $response["errors"]
+            );
+        }else{
+            Cookie::queue(Cookie::forget("email"));
+            $formatter = new ApiResponseFormatter(
+                200, "ok", "Forgot Password Complete"
             );
         }
         return response()->json(
@@ -144,6 +259,20 @@ class CognitoController extends Controller
 
     public function changePassword(Request $request)
     {
+        $validator = Validator::make($request->all(), 
+        [
+            'previous_password' => ['required', 'min:8'],
+            'proposed_password' => ['required', 'min:8'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+
         $access_token = Cookie::get("access_token");
 
         $response = $this->cognito_client->changePassword($request->previous_password, $request->proposed_password, $access_token);
@@ -165,6 +294,18 @@ class CognitoController extends Controller
 
     public function deleteUser(Request $request)
     {
+        $validator = Validator::make($request->all(), 
+        [
+            'email' => ['required', 'email'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
         $id_token = Cookie::get("id_token");
 
         $response = $this->cognito_client->deleteUser($request->email, $id_token);
@@ -182,5 +323,45 @@ class CognitoController extends Controller
         return response()->json(
             $formatter->getResponseArray()
         );
+    }
+
+    public function updateUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+        [
+            'pre_email' => ['required', 'email'],
+            'new_email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ]);
+        if($validator->fails()){
+            $formatter = new ApiResponseFormatter(
+                422, '入力項目が足りないか、指定された形式で入力されておりません。', 'バリデーション エラー'
+            );
+            return response()->json(
+                $formatter->getResponseArray()
+            );
+        }
+        $response = $this->cognito_client->updateUser($request->pre_email, $request->new_email, $request->password);
+
+        if(Arr::has($response, "errors")){
+            $formatter = new ApiResponseFormatter(
+                500, $response["message"], $response["errors"]
+            );
+        }else{
+            $formatter = new ApiResponseFormatter(
+                200, "ok", "Update User Complete."
+            );
+        }
+
+        return response()->json(
+            $formatter->getResponseArray()
+        );
+    }
+
+    public function listUsers(Request $request)
+    {
+        $response = $this->cognito_client->listUsers();
+
+        return $response;
     }
 }

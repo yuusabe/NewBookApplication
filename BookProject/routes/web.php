@@ -37,6 +37,12 @@ Route::prefix('login')->group(function () {
     Route::get('/first', function () {
         return view('login_first');
     });
+    Route::get('/forget', function () {
+        return view('password_send');
+    });
+    Route::get('/forget/confirm', function () {
+        return view('forget_password_confirm');
+    });
 });
 #アカウント管理画面（アカウント登録・アカウント一覧が見れる）
 Route::get('/account_management', function () {

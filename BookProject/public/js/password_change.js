@@ -17,12 +17,15 @@ $(function(){
         }).done(function(res){
             if(res.code == 200){
                 console.log(res);
-                // window.location.href = '/completion';
-            }else if(res.code == 400){
+                alert('パスワード変更に成功しました。');
+                window.location.href = "/mypage";
+            }else if(res.code == 401){
                 console.log(res);
+                alert('ログインしてください');
+                window.location.href = "/login";
             }else{
-                console.log(res.errors);
                 $('#error_text').text(`${res.message}`);
+                console.log(res);
             }
         // 失敗時
         }).fail(function(e){

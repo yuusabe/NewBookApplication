@@ -9,7 +9,7 @@
         <div id="text">
             <p>完了しました。</p>
         </div>
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/list_of_books'">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='/list_of_books'">
             OK
         </button>
     </div>

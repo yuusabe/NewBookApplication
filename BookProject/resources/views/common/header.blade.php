@@ -66,7 +66,7 @@
                                 <button type="button" id="button" class="btn btn-outline-danger" onclick="location.href=\'https://www-cf.dtg-shosekikanri2020-test.tk/category\'">
                                     カテゴリ管理
                                 </button>
-                                <button type="button" id="button" class="btn btn-outline-danger" onclick="location.href=\'https://www-cf.dtg-shosekikanri2020-test.tk/account_management\'">
+                                <button type="button" id="button" class="btn btn-outline-danger" onclick="location.href=\'/account_management\'">
                                     アカウント管理
                                 </button>';
                     }
@@ -74,10 +74,10 @@
                     <button type="button" id="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/list_of_books'">
                         書籍一覧
                     </button>
-                    <button type="button" id="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/mypage'">
+                    <button type="button" id="button" class="btn btn-outline-secondary" onclick="location.href='/mypage'">
                         マイページ
                     </button>
-                    <button type="button" id="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/login'">
+                    <button type="button" id="logout" class="btn btn-outline-secondary">
                         ログアウト
                     </button>
                 </div>
@@ -89,6 +89,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src=<?=$jspath ?? ''?>></script>
+    <script type="text/javascript" src='js/header.js'></script>
 </footer>
 </body>

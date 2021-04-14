@@ -10,7 +10,7 @@
 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
       // cookieの値を読み書きする要素
       var email = document.getElementById("email");
       var pass = document.getElementById("pass");
@@ -32,10 +32,10 @@
         pass.value = pass_v;
         console.log(document.cookie);
       }
-</script>
+</script> -->
 
     <!-- Login Form -->
-    <p>{{$adata -> account_name}}さん、いらっしゃいませ</p>
+    <p>さん、いらっしゃいませ</p>
     <form>
       <input type="button" value="書籍一覧へ" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/list_of_books'">
     </form>

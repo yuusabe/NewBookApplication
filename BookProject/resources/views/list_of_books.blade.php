@@ -61,6 +61,7 @@
   </div>
   <div id="button_p">
     <div id="button">
+    
 
     <form action="" method="post" enctype="multipart/form-data">
       @csrf
@@ -77,7 +78,7 @@
       <input type = "hidden" name="path" value=""> 
       <input type = "hidden" name="category" value="">
 
-      <!-- <?php
+      <?php
       if (!empty($_COOKIE["mflag"]))
       {
         $mflag = $_COOKIE["mflag"];
@@ -92,7 +93,7 @@
                 書籍編集
               </button>';
             }
-      ?> -->
+      ?>
     </form>
     </div>
   </div>

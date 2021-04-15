@@ -6,6 +6,7 @@ use App\Http\Controllers\BookListController;
 use App\Http\Controllers\LendBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ReturnBookController;
+use App\Models\Book;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,21 @@ Route::prefix('login')->group(function () {
 Route::prefix('cognito')->group(function () {
     Route::post('add', 'App\Http\Controllers\CognitoController@cognitoAdd');
 });
+
+// 仮の書籍登録用API
+Route::post('/book/add', function(){
+    $post = new Book();
+    $post->title = request()->get("title");
+    $post->title_furigana = request()->get("title_furigana");
+    $post->cover_pic = request()->get("cover_pic");
+    $post->publisher = request()->get("publisher");
+    $post->author = request()->get("author");
+    $post->year_of_issue = request()->get("year_of_issue");
+    $post->logic_flag = request()->get("logic_flag");
+    $post->save();
+    return [];
+});
+
 // 書籍一覧取得API（ソート機能あり）
 Route::get('/book/all_get', [BookListController::class, 'all_get']);
 // 貸出API

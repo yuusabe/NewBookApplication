@@ -42,58 +42,8 @@
   
   <input id="sbtn" id="search" type="submit" value="検索" /></div>
   </form>
-
-
-  <div id="book_p">
-    <div id="book">
-      <img src="" id="cover_pic" alt="表紙画像" width="135" height="135" />
-    </div>
-    
-    <div id="book">
-      <div id="text">
-        <p id="category">カテゴリ</p>
-        <p id="title"></p>
-        <p id="year_of_issue"></p>
-        <p id="publisher"></p>
-        <p id="logic_flag">貸出状況：貸出可</p>
-      </div>
-    </div>
-  </div>
-  <div id="button_p">
-    <div id="button">
-
-    <form action="" method="post" enctype="multipart/form-data">
-      @csrf
-      <input type = "hidden" name="number" value="">
-        <button type="submit" class="btn btn-outline-secondary" name = "info">
-          詳細表示
-        </button>
-    </form>
-    </div>
-    <div id="button">
-    <form action="" method="post" enctype="multipart/form-data">
-      @csrf
-      <input type = "hidden" name="number" value="">
-      <input type = "hidden" name="path" value=""> 
-      <input type = "hidden" name="category" value="">
-
-      <!-- <?php
-      if (!empty($_COOKIE["mflag"]))
-      {
-        $mflag = $_COOKIE["mflag"];
-      }
-      else
-      {
-          $mflag = "なし";
-      }
-      if ($mflag == "1")
-      {
-          echo '<button type="submit" class="btn btn-outline-danger" name = "change">
-                書籍編集
-              </button>';
-            }
-      ?> -->
-    </form>
+    <div id="book_list"></div>
+  </form>
     </div>
   </div>
 
@@ -109,6 +59,6 @@
       </button>
     </div>
   </div>
-<script src="{{ mix('js/all_get.js') }}"></script>  
+<script src="{{ asset('js/all_get.js') }}"></script>
 </main>
 @endsection

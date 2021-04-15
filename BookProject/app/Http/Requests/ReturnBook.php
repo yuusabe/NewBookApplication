@@ -27,15 +27,14 @@ class ReturnBook extends FormRequest
     public function rules()
     {
         return [
-            'book_number' => 'required',
-            'account_number' => 'required',
+            'book_number' => 'required'
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'message' => 'Validation Error. 書籍情報もしくはアカウント情報が欠落しています。',
+            'message' => 'Validation Error. 書籍情報が欠落しています。',
         ], 422, [], JSON_UNESCAPED_UNICODE));
     }
 }

@@ -28,7 +28,7 @@ class BookListController extends Controller
             // ソートの指定がない時
             $book_data = $master_data;
         }
-        if ($book_data) {
+        if (count($book_data) > 0) {
             return json_encode([
                 'message' => 'ok',
                 'data' => $book_data
@@ -36,6 +36,7 @@ class BookListController extends Controller
         } else {
             return json_encode([
                 'message' => '本アプリに登録されている書籍はありません。',
+                'data' => $book_data
             ], 200);
         };
     }

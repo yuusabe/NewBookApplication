@@ -20,8 +20,8 @@ class ReturnBookController extends Controller
     {
         // 書籍IDを受け取る
         $id = $request->input('book_number');
-        $book = Lend::where('book_number',$id)->update(['lend_flag' => 0]);
-        $b_info = Lend::where('book_number',$id)->get();
+        $book = Lend::where('book_number',$id)->where('lend_flag',1)->update(['lend_flag' => 0]);
+        // $b_info = Lend::where('book_number',$id)->where('lend_flag',1)->get();
         if ($book == 0) {
             return response()->json([
                 'message' => 'システムエラー。管理者にお問い合わせください。',
@@ -29,7 +29,7 @@ class ReturnBookController extends Controller
         } else {
             return response()->json([
                 'message' => 'ok',
-                'data' => $b_info,
+                'data' => $book,
             ], 200);
         }
     }

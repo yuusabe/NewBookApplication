@@ -10,13 +10,13 @@
             <p>アカウント登録情報</p>
         </div>
         <div id="account">
-            <p>アカウント名：{{$adata -> account_name}}</p>
-            <p>メールアドレス：{{$adata -> mail_address}}</p>
-            <p>パスワード：{{$adata -> password}}</p>
+            <p>アカウント名：</p>
+            <p>メールアドレス：</p>
+            <p>パスワード：</p>
         </div>
     </div>
     <div id="boo">
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/password_change'">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='/password_change'">
             パスワード変更
         </button>
     </div>
@@ -42,7 +42,7 @@
         ?>
     </div>
     <div id="boo">
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='https://www-cf.dtg-shosekikanri2020-test.tk/return_book'">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='/return_book'">
             返却手続きへ
         </button>
     </div>

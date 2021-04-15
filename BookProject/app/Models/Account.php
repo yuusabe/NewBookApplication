@@ -10,7 +10,7 @@ class Account extends Model
     protected $fillable = [
         'account_name',
         'mail_address',
-        'amanager_flag',
+        'manager_flag',
         'logic_flag',
     ];
 }

@@ -37,6 +37,12 @@ Route::prefix('login')->group(function () {
     Route::get('/first', function () {
         return view('login_first');
     });
+    Route::get('/forget', function () {
+        return view('password_send');
+    });
+    Route::get('/forget/confirm', function () {
+        return view('forget_password_confirm');
+    });
 });
 #アカウント管理画面（アカウント登録・アカウント一覧が見れる）
 Route::get('/account_management', function () {
@@ -46,5 +52,18 @@ Route::get('/account_management', function () {
 #アカウント登録確認画面
 Route::get('/account_management_check', function () {
     return view('account_management_check');
+});
+
+//マイページ画面
+Route::get('/mypage', function () {
+    return view('mypage');
+});
+//パスワード変更画面
+Route::get('/password_change', function () {
+    return view('password_change');
+});
+//完了画面
+Route::get('/completion', function () {
+    return view('completion');
 });
 

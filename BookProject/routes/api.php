@@ -25,18 +25,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //認証チェック
 Route::group(['middleware' => 'auth'], function (){
-
+    Route::post('/cognito/change_password', 'App\Http\Controllers\CognitoController@changePassword');
+    Route::post('/cognito/create_user', 'App\Http\Controllers\CognitoController@createUser');
 });
 
-//ログイン
+// ログイン
 Route::prefix('login')->group(function () {
     Route::post('/', 'App\Http\Controllers\CognitoController@login');
     Route::post('/first', 'App\Http\Controllers\CognitoController@firstLogin');
+    Route::post('/forgot_password', 'App\Http\Controllers\CognitoController@forgotPassword');
+    Route::post('/confirm_forgot_password', 'App\Http\Controllers\CognitoController@confirmForgotPassword');
 });
 
-//Cognito
+// ログアウト
+Route::get('logout', 'App\Http\Controllers\LogoutController@deleteCookie');
+
+// Cognito
 Route::prefix('cognito')->group(function () {
-    Route::post('add', 'App\Http\Controllers\CognitoController@cognitoAdd');
+    Route::post('/delete_user', 'App\Http\Controllers\CognitoController@deleteUser');
+    Route::post('/update_user', 'App\Http\Controllers\CognitoController@updateUser');
+    Route::get('/list_users', 'App\Http\Controllers\CognitoController@listUsers');
 });
 
 // 仮の書籍登録用API

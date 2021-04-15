@@ -1,23 +1,24 @@
 $(function(){
-    $("#login_first").click(function(){
-        if($("#pass1").val() !== $("#pass2").val()){
-            $('#error_text').text('入力したパスワードが一致しておりません。');
-            return false;
-        }
+    $(document).ready(function(){
+        const data = JSON.parse(sessionStorage.getItem("account_data"));
+        $('#email').text(`メールアドレス：${data.email}`);
+        $('#password').text(`仮パスワード：${data.password}`);
+    });
+
+
+    $("#add_account").click(function(){
         $.ajax({
             type: "POST",
-            url: "/api/login/first",
-            data: {
-                password: $("#pass1").val()
-            },
+            url: "/api/cognito/create_user",
+            data: JSON.parse(sessionStorage.getItem("account_data")),
             dataType: "json"
         }).done(function(res){
             if(res.code == 200){
                 switch(res.message){
                     case "ok":
-                        console.log("ログイン成功");
                         console.log(res);
-                        window.location.href = "/list_of_books";
+                        sessionStorage.removeItem("account_data");
+                        window.location.href = "/completion";
                         break;
                 }
             }else if(res.code == 401){
@@ -25,7 +26,7 @@ $(function(){
                 alert('ログインしてください');
                 window.location.href = "/login";
             }else{
-                console.log(res.errors);
+                console.log(res);
                 $('#error_text').text(`${res.message}`);
             }
         }).fail(function(e){

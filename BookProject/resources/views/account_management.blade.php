@@ -1,11 +1,12 @@
 <?php $title = "DTGBOOK【アカウント管理画面】";?>
 <?php $csspath = "css/account.css";?>
+<?php $jspath = "js/account_management.js";?>
 
 @extends("common.header")
 @section('body')
 
 <main>
-  <form method="post" action="{{ route('account_manage.post') }}">
+  <form>
     @csrf
     <!-- <form action="https://www-cf.dtg-shosekikanri2020-test.tk/account_management_check" method="get"> -->
     <div id="text">
@@ -18,34 +19,35 @@
         <div id="tb">
           <p>アカウント名</p>
         </div>
-        <input type="text" id="tbox" name="account_name" placeholder="DTG太郎">
+        <input type="text" id="tbox" class="account_name" name="account_name" placeholder="DTG太郎">
       </div>
       <div>
         <div id="tb">
           <p>メールアドレス</p>
         </div>
-        <input type="email" id="tbox" name="address" placeholder="abc@example.com">
+        <input type="email" id="tbox" class="email" name="address" placeholder="abc@example.com" required="required">
       </div>
       <div>
         <div id="tb">
           <p>パスワード</p>
         </div>
-        <input type="text" id="tbox" name="password" placeholder="password">
+        <input type="text" id="tbox" class="password" name="password" placeholder="password" required="required">
       </div>
       <div id="radio">
         <div id="tb">
           <p>管理者権限</p>
         </div>
-          <input type="radio" name="accounttype" value="一般ユーザ">一般ユーザ
-          <input type="radio" name="accounttype" value="管理者ユーザ">管理者ユーザ
+          <input type="radio" name="accounttype" value="0">一般ユーザ
+          <input type="radio" name="accounttype" value="1">管理者ユーザ
       </div>
     </div>
     <div id="button_p">
       <div id="button">
-        <button type="submit" class="btn btn-outline-secondary" name = "add">
+        <button type="button" id="add_account" class="btn btn-outline-secondary" name = "add">
           アカウント登録
         </button>
       </div>
+      <p id="error_text"></p>
     </div>
   </form>
 
@@ -53,25 +55,15 @@
     <p>アカウント一覧</p>
   </div>
 
-  @foreach($a_list as $a)
   <div id="account_p">
     <div id="account">
       <nobr id="a_text">
-      @if($a->manager_flag == FALSE)
-      {{$a->account_name }}：一般ユーザ
-      @else
-      {{$a->account_name }}：管理者ユーザ
-      @endif
       </nobr>
     </div>
     <div id="account">
       <div id="button_p">
-        <form method="post" action= "{{ route('account_manage.post') }}">
+        <form>
           @csrf
-          <input type = "hidden" name="account_number" value="{{$a->account_number}}">
-          <input type = "hidden" name="account_name" value="{{$a->account_name}}">
-          <input type = "hidden" name="mail_address" value="{{$a->mail_address}}">
-          <input type = "hidden" name="manager_flag" value="{{$a->manager_flag}}">
           
           <div id="button">
             <button type="submit" class="btn btn-outline-secondary" name = "change">
@@ -87,7 +79,6 @@
       </div>
     </div>
   </div>
-  @endforeach
   <!-- </form> -->
 </main>
 
